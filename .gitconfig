@@ -1,0 +1,9 @@
+[user]
+	name = Britt Crawford
+	email = britt.v.crawford@gmail.com
+[github]
+	user = britt
+[core]
+	editor = subl
+[push]
+	default = simple
