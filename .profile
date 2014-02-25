@@ -12,6 +12,7 @@ alias be="bundle exec $1"
 alias gti="git"
 alias n="boom"
 alias gs="rvm gemset use $1"
+alias gh_deploy="git checkout master && git merge dev && git push && git checkout dev"
 
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
