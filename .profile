@@ -1,5 +1,5 @@
 source ~/.cinderella.profile
-export PATH="/Users/bcrawford/Developer/bin:$PATH:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:~/workspace/scripts:~/workspace/scripts/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools"
+export PATH="/Users/bcrawford/Developer/bin:$PATH:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:~/workspace/scripts:~/workspace/scripts/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin"
 export EDITOR="subl"
 export NODE_PATH="/Users/bcrawford/Developer/lib/node"
 
@@ -116,4 +116,4 @@ export RUBY_HEAP_FREE_MIN=500000
 
 export CC=/Users/bcrawford/Developer/bin/gcc-4.2
 . "$HOME/.rvm/scripts/rvm"
-
+#rvm use ruby-1.9.2
