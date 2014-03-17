@@ -1,6 +1,6 @@
 source ~/.cinderella.profile
-export PATH="/Users/bcrawford/Developer/bin:$PATH:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:~/workspace/scripts:~/workspace/scripts/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin"
-export EDITOR="subl"
+export PATH="/Users/bcrawford/Developer/bin:$PATH:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:~/workspace/scripts:~/workspace/scripts/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin:/Users/bcrawford/Developer/share/npm/bin"
+export EDITOR="subl -w"
 export NODE_PATH="/Users/bcrawford/Developer/lib/node"
 
 alias o="open"
