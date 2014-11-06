@@ -1,7 +1,6 @@
 source ~/.cinderella.profile
 export PATH="/Users/bcrawford/Developer/bin:$PATH:/usr/local/bin:/usr/local/sbin:/usr/X11/bin:~/workspace/scripts:~/workspace/scripts/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin:/Users/bcrawford/Developer/share/npm/bin:/usr/local/snowflake-client/"
 export EDITOR="subl -w"
-export NODE_PATH="/Users/bcrawford/Developer/lib/node"
 
 alias o="open"
 alias topcpu='ps aux | sort -n +2 | tail -10'  # top 10 cpu processes
@@ -107,12 +106,5 @@ function manpdf() {
   man -t $@ | open -f -a /Applications/Preview.app/
 }
 
-# export RUBY_GC_HEAP_INIT_SLOTS=1000000
-# export RUBY_HEAP_SLOTS_INCREMENT=1000000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-# export RUBY_GC_MALLOC_LIMIT=1000000000
-# export RUBY_HEAP_FREE_MIN=500000
 
-# export CC=/Users/bcrawford/Developer/bin/gcc-4.2
 . "$HOME/.rvm/scripts/rvm"
-#rvm use ruby-1.9.2
