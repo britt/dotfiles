@@ -95,3 +95,4 @@ function manpdf() {
 
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+. "$HOME/.rvm/scripts/rvm"
