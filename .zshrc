@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="mh"
+ZSH_THEME="muse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +45,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm brew z ruby rails bundler coffee gem git_remote_branch lein osx python rvm screen sublime sudo web-search)
+plugins=(git node npm brew z ruby rails bundler coffee gem git_remote_branch lein osx python rvm screen sublime sudo web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,9 +85,9 @@ alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)
 alias t="terminitor start $1"
 alias be="bundle exec $1"
 alias gti="git"
-alias n="boom"
 alias gs="rvm gemset use $1"
 alias gh_deploy="git checkout master && git merge dev && git push && git checkout dev"
+alias mountdocs="encfs ~/dropbox_personal/personal.documents ~/Documents/personal"
 
 function manpdf() {
   man -t $@ | open -f -a /Applications/Preview.app/
