@@ -96,6 +96,7 @@ function manpdf() {
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 ### Added by the Heroku Toolbelt
-source "$HOME/.rvm/scripts/rvm"
 export GOPATH=$HOME/workspace/go
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/heroku/bin:$GOPATH/bin"
+export PATH="$PATH:/usr/local/go/bin"
