@@ -45,13 +45,13 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node npm brew z ruby rails bundler coffee gem git_remote_branch lein osx python rvm screen sublime sudo web-search)
+plugins=(git node npm brew z ruby rails bundler coffee gem git_remote_branch lein osx python rvm screen sublime sudo web-search vagrant bgnotify grunt)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/bcrawford/.rvm/bin:~/workspace/scripts:~/workspace/scripts/local:/usr/local/snowflake-client/:/local:~/.rvm/bin:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin:/Users/bcrawford/Developer/share/npm/bin"
+export PATH="~/.rvm/bin:/Users/bcrawford/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/workspace/scripts:~/workspace/scripts/local:/usr/local/snowflake-client/:/local:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin:/Users/bcrawford/Developer/share/npm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -87,7 +87,7 @@ alias be="bundle exec $1"
 alias gti="git"
 alias gs="rvm gemset use $1"
 alias gh_deploy="git checkout master && git merge dev && git push && git checkout dev"
-alias mountdocs="encfs ~/dropbox_personal/personal.documents ~/Documents/personal"
+alias mountdocs="encfs ~/Dropbox/personal.documents ~/Documents/personal"
 
 function manpdf() {
   man -t $@ | open -f -a /Applications/Preview.app/
@@ -95,4 +95,7 @@ function manpdf() {
 
 
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
-. "$HOME/.rvm/scripts/rvm"
+### Added by the Heroku Toolbelt
+source "$HOME/.rvm/scripts/rvm"
+export GOPATH=$HOME/workspace/go
+export PATH="$PATH:/usr/local/heroku/bin:$GOPATH/bin"
