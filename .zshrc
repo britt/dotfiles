@@ -45,13 +45,11 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node npm brew z ruby rails bundler coffee gem git_remote_branch lein osx python rvm screen sublime sudo web-search vagrant bgnotify grunt)
-
+plugins=(git node npm brew z git_remote_branch osx screen sudo)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="~/.rvm/bin:/Users/bcrawford/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/workspace/scripts:~/workspace/scripts/local:/usr/local/snowflake-client/:/local:/Users/bcrawford/workspace/depot_tools:/Users/bcrawford/node_modules/.bin:/Users/bcrawford/Developer/share/npm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -61,7 +59,7 @@ export PATH="~/.rvm/bin:/Users/bcrawford/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
 else
-  export EDITOR='subl -w'
+  export EDITOR='vscode'
 fi
 
 # Compilation flags
@@ -76,27 +74,76 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+
+alias gps='cd $GPS'
+alias zshconfig="$EDITOR ~/.zshrc && . ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 alias o="open"
 alias topcpu='ps aux | sort -n +2 | tail -10'  # top 10 cpu processes
 alias topmem='ps aux | sort -n +3 | tail -10'  # top 10 memory processes
 alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
-alias t="terminitor start $1"
 alias be="bundle exec $1"
 alias gti="git"
 alias gs="rvm gemset use $1"
 alias gh_deploy="git checkout master && git merge dev && git push && git checkout dev"
-alias mountdocs="encfs ~/Dropbox/personal.documents ~/Documents/personal"
+alias repath="source ~/.zshrc"
+alias tf="terraform"
+alias gopathme='origDir="$PWD"; lastDir=""; while [ "$lastDir" != "$PWD" ]; do if [ -d src ]; then export GOPATH="$PWD"; export PATH="$GOPATH/bin:$PATH"; break; fi; lastDir="$PWD"; cd ../; done; cd $origDir;'
 
 function manpdf() {
   man -t $@ | open -f -a /Applications/Preview.app/
 }
 
+# StrongDM code sync
+PROJECTS=("web" "mysql" "mssql" "mongo" "dbtest" "dbplugin" "postgres" "tf" "redis" "presto" "dynamodb" "elastic" "bigquery" "memcached" "cassandra")
+function pullall() {
+  for i in $PROJECTS
+  do
+    cd $GPS && cd $i && git pull
+  done
+  cd $GPS
+}
 
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+function pushall() {
+  for i in $PROJECTS
+  do
+    cd $GPS && cd $i && git push
+  done
+  cd $GPS
+}
+
+
+# Link gpg-agent and pinentry
+if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
+  source ~/.gnupg/.gpg-agent-info
+  export GPG_AGENT_INFO
+  GPG_TTY=$(tty)
+  export GPG_TTY
+else
+  eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
+fi
+
+
+# source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ### Added by the Heroku Toolbelt
-export GOPATH=$HOME/workspace/go
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$PATH:/usr/local/heroku/bin:$GOPATH/bin"
-export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/workspace/go"
+export GPS="$GOPATH/src/github.com/strongdm"
+export GOBRITT="$GOPATH/src/github.com/britt"
+
+# source ~/workspace/go/src/github.com/strongdm/web/.sdmenv
+
+# source /Volumes/Keybase/private/britt,jmccarthy/signing/signing.env
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export SDM_DOCKERIZED=true
+export SDM_VERBOSE=true
+export ENABLE_FLUTTER_DESKTOP=true
+
+alias ssh="/Users/britt/bin/sdm ssh wrapped-run"
+alias scp="scp -S'/Users/britt/bin/sdm' -osdmSCP"
+alias devkey="cat /Volumes/Keybase/private/britt,jmccarthy/ssh-privkeys/dev/sdm-dev.passphrase | pbcopy && ssh-add /Volumes/Keybase/private/britt,jmccarthy/ssh-privkeys/dev/sdm-dev"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export GO111MODULE=on
+export PATH="$PATH:$HOME/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.rvm/bin:/Users/britt/.rvm/bin:/usr/local/go/bin:$GOPATH/bin/:$HOME/bin:$HOME/.rvm/bin:$HOME/bin/flutter/bin:$HOME/.cargo/bin"
