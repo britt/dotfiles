@@ -14,6 +14,7 @@ brew "llm", link: false
 brew "node"
 brew "charmbracelet/tap/mods"
 brew "simonw/llm/ttok"
+brew install jesseduffield/lazygit/lazygit
 cask "1password-cli"
 cask "ghostty"
 cask "monodraw"
