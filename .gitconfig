@@ -3,7 +3,5 @@
 	email = britt.v.crawford@gmail.com
 [github]
 	user = britt
-[core]
-	editor = subl
-[push]
-	default = simple
+[init]
+  defaultBranch = main
