@@ -1,0 +1,12 @@
+INSTALL postgres;
+INSTALL autocomplete;
+INSTALL avro;
+INSTALL aws;
+INSTALL encodings;
+INSTALL excel;
+INSTALL fts;
+INSTALL httpfs;
+INSTALL iceberg;
+INSTALL spatial;
+INSTALL sqlite;
+INSTALL vss;
