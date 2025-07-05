@@ -1,0 +1,17 @@
+# Rules
+
+## General
+
+- Ask me to provide more context when needed or search the web
+- Ask questions to clarify goals and ensure alignment.
+- Ask me to provide docs to the relevant packages or tools if you can't find them
+-  Read files before you try to edit them.
+- Fix linting errors.
+- Write small functions, and split big components into small ones (modular code is good).
+- Clear is better than clever. Make code as simple as possible.
+- If there is a @README.md go read it to understa nd the project
+
+## Lessons
+
+- If you learn anything useful that you want to remember, add it to a `Lessons` section in a `.cursor/rules` file so you will remember it.
+- When modifying the repo, suggest updates to `AGENTS.md` and `.cursor/rules` if they would help maintain consistency.

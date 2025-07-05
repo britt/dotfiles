@@ -71,6 +71,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -87,16 +88,15 @@ else
   export EDITOR='cursor'
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# Compilation flags
+# export ARCHFLAGS="-arch $(uname -m)"
 
-USER=`whoami`
-
-# Useful functions
-function manpdf() {
-  man -t $@ | open -f -a /Applications/Preview.app/
-}
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 
 q() {
   local url="$1"
@@ -178,6 +178,11 @@ yts() {
   echo "Transcript saved to: $output_file"
 }
 
+# Useful functions
+function manpdf() {
+  man -t $@ | open -f -a /Applications/Preview.app/
+}
+
 # Function to set SAND_API_KEY from keys file
 set_sand_key() {
     if [[ -z "$1" ]]; then
@@ -251,29 +256,60 @@ get_sand_key() {
     echo "$key_value"
 }
 
+USER=`whoami`
 
-# Aliases
-alias zshconfig="$EDITOR ~/.zshrc && . ~/.zshrc"
+# For a full list of active aliases, run `alias`.
+alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 alias zshrefresh=". ~/.zshrc"
 alias topcpu='ps aux | sort -n +2 | tail -10'  # top 10 cpu processes
 alias topmem='ps aux | sort -n +3 | tail -10'  # top 10 memory processes
 alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
-alias aid='source ~/.aider/bin/activate && aider --env-file ~/.aider/.env'
+alias aid='/Users/brittcrawford/.local/bin/aider'
 alias o="open"
+alias monotest="go test --short ./... && golangci-lint run"
+alias jstest="pnpm lint && pnpm check-types && pnpm prettier-fix && pnpm test"
+# alias setopenai="export OPENAI_API_KEY=`op item get sbwbstgfv55iepn373hsfu2zja --reveal --format json | jq -r '.fields[] | select(.id == \"credential\") | .value'`"
 
-# Typos
-alias gti="git"
-
+export PATH="$PATH:/Applications/Cursor.app/Contents/MacOS"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH:/opt/homebrew/bin"
+export PATH="$PATH:/Users/$USER/go/bin/:$HOME/.local/bin:$HOME/bin:$HOME/go/bin"
+export ICLOUD_PATH="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
 # pnpm
-export PNPM_HOME="/Users/brittcrawford/Library/pnpm"
+export PNPM_HOME="/Users/$USER/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export PATH="$PATH:/Users/$USER/go/bin/:$HOME/.local/bin"
-export ICLOUD_PATH="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
 
-export PATH=$PATH:$HOME/.local/bin
-. $HOME/.local/bin/env
+. "$HOME/.local/bin/env"
+
+# Wasmer
+export WASMER_DIR="/Users/brittcrawford/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH:/Users/brittcrawford/.deno/bin"
+
+# bun completions
+[ -s "/Users/brittcrawford/.bun/_bun" ] && source "/Users/brittcrawford/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export OPENAI_API_KEY=`op read op://Employee/"Laptop OpenAI key"/credential`
+export SLACK_APP_TOKEN=`op read "op://Engineering/Slack Mirri Credentials/2pemhbzcp2nhgxgio2owaepi5u"`
+export SLACK_BOT_TOKEN=`op read "op://Engineering/Slack Mirri Credentials/lwsgiabf3bjaq554uymqdzxht4"`
+export ARCADE_API_KEY=`op read "op://Engineering/Development Arcade API Key/credential"`
+source "$HOME/.rye/env"
